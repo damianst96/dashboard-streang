@@ -32,9 +32,9 @@ function LatestUser() {
       <h1>Último usuario registrado</h1>
       {loading && <p>Cargando...</p>}
       {error && <p>Error: {error}</p>}
-        <li>
-          {lastUser.name} {lastUser.last_name}
-        </li>
+          <p>Nombre: {lastUser.name} {lastUser.last_name}</p>
+          <p>E-Mail: {lastUser.email}</p>
+          <p>Nombre de usuario: {lastUser.user_name}</p>
     </div>
   );
 }
