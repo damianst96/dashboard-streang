@@ -2,7 +2,8 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import ProductList from './assets/components/ProductList';
 import CategoryProducts from './assets/components/CategoryProducts';
-// import Dashboard from './assets/components/Dashboard';
+import LatestProduct from './assets/components/LatestProduct';
+import LatestUser from './assets/components/LatestUser';
 
 function App() {
 
@@ -11,6 +12,8 @@ function App() {
       <BrowserRouter>
         <ProductList />
         <CategoryProducts />
+        <LatestProduct />
+        <LatestUser />
       </BrowserRouter>
     </div>
   )

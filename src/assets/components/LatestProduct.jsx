@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-function CategoryProducts() {
+function LatestProduct() {
   // Estado para almacenar los productos
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Estado para manejar la carga
   const [error, setError] = useState(null); // Estado para manejar errores
-
-  let videogames = [];
-  let consoles = [];
-  let accesories = [];
-  let audio = [];
-  let pc = [];
-  let others = [];
-
-  function CategoryCount(array, category){
-    products.map(function(product){
-      if(product.category === category){
-        array.push(product);
-      }
-    })
-    return array.length;
-  }
+  let [lastProduct, setLastProduct] = useState([]);
 
   useEffect(() => {
     // Realiza la llamada a la API cuando el componente se monta
@@ -30,6 +15,8 @@ function CategoryProducts() {
       })
       .then(products => {
         // console.log(products); // Muestra los datos en la consola para depuración
+        lastProduct = products.data[products.data.length - 1];
+        setLastProduct(lastProduct);
         setProducts(products.data); // Asume que los productos están en data.data
         setLoading(false); // Cambia el estado de carga a falso
       })
@@ -42,19 +29,14 @@ function CategoryProducts() {
 
   return (
     <div>
-      <h1>Productos por categoría</h1>
+      <h1>Último producto</h1>
       {loading && <p>Cargando...</p>}
       {error && <p>Error: {error}</p>}
-      <ul>
-        <li>Videojuegos: {CategoryCount(videogames, "videogames")}</li>
-        <li>Consolas: {CategoryCount(consoles, "consoles")}</li>
-        <li>Accesorios: {CategoryCount(accesories, "accesories")}</li>
-        <li>Audio y Sonido: {CategoryCount(audio, "audio")}</li>
-        <li>Computación: {CategoryCount(pc, "PC")}</li>
-        <li>Otros: {CategoryCount(others, "others")}</li>
-      </ul>
+        <li>
+          {lastProduct.name} - ${lastProduct.final_price} - {lastProduct.category}
+        </li>
     </div>
   );
 }
 
-export default CategoryProducts;
+export default LatestProduct;
